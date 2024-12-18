@@ -6,5 +6,5 @@ export const getProducts = catchedController(
   async (req: Request, res: Response) => {
     const products = await getProductsService();
     res.json(products);
-  }
+  }
 );
