@@ -6,6 +6,7 @@ import { userLogin } from "@/app/services"; // Asegúrate de importar el servici
 interface AuthContextType {
     isAuthenticated: boolean;
     userName: string | null;
+    authError: string | null;
     login: (username: string, password: string) => Promise<void>;
     logout: () => void;
 }
@@ -26,6 +27,7 @@ export const useAuth = (): AuthContextType => {
 export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
     const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false);
     const [userName, setUserName] = useState<string | null>(null);
+    const [authError, setAuthError] = useState<string | null>(null);
 
     useEffect(() => {
         // Revisar si hay un token en localStorage al montar el componente
@@ -43,17 +45,19 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
         try {
             // Llamamos al servicio de login, el cual devuelve el token y los datos del usuario
             const data = await userLogin(username, password);
-            
+
             if (data && data.token) {
                 // Guardamos el token y los datos reales del usuario
                 localStorage.setItem("authToken", data.token);
                 localStorage.setItem("userData", JSON.stringify(data.user)); // Cambia esto si el backend devuelve más datos
                 setIsAuthenticated(true);
                 setUserName(data.user.name); // Guarda el nombre del usuario
+                setAuthError(null); // Reseteamos errores si el login es exitoso
             } else {
-                console.error("Error de autenticación: No se recibió un token.");
+                setAuthError("No se recibió un token válido.");
             }
         } catch (error) {
+            setAuthError("Error al iniciar sesión. Verifica tus credenciales.");
             console.error("Error al intentar iniciar sesión:", error);
         }
     };
@@ -64,10 +68,11 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
         localStorage.removeItem("userData");
         setIsAuthenticated(false);
         setUserName(null);
+        setAuthError(null); // Limpiamos errores al cerrar sesión
     };
 
     return (
-        <AuthContext.Provider value={{ isAuthenticated, userName, login, logout }}>
+        <AuthContext.Provider value={{ isAuthenticated, userName, authError, login, logout }}>
             {children}
         </AuthContext.Provider>
     );

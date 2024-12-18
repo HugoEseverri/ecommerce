@@ -14,4 +14,5 @@ export interface IProducts{
     image: string | StaticImageData;
     categoryId: number;
     category: ProductsCategory;
+    quantity: number;
 }

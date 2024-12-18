@@ -4,18 +4,7 @@ import { useAuth } from "@/auth/AuthContext";
 import carrocompra from "@/assets/img/carrocompra.png";
 
 const Navbar: React.FC = () => {
-    const { isAuthenticated, userName, login, logout } = useAuth();
-
-    const handleLogin = async (event: React.FormEvent) => {
-        event.preventDefault();
-
-        // Llamada a login con los datos introducidos
-        if (username && password) {
-            await login(username, password); // Aquí deberías hacer una llamada real al backend
-        } else {
-            console.log("Nombre de usuario y contraseña son necesarios.");
-        }
-    };
+    const { isAuthenticated, logout } = useAuth();
 
     return (
         <div className="bg-white flex justify-center p-9 items-center">
@@ -42,8 +31,9 @@ const Navbar: React.FC = () => {
                     <li>
                         {isAuthenticated ? (
                             <>
-                                <span className="text-black text-[18px] m-3 hover:text-[#c7114a]">
-                                    Hola, {userName}
+                                <span className="text-black text-[18px] m-3">
+                                    <a href="/dashboard">MI CUENTA</a>
+
                                 </span>
                                 <button
                                     className="text-black text-[18px] m-3 hover:text-[#c7114a]"
@@ -53,16 +43,16 @@ const Navbar: React.FC = () => {
                                 </button>
                             </>
                         ) : (
-                            <button
+                            <a
                                 className="text-black text-[18px] m-3 hover:text-[#c7114a]"
-                                onClick={handleLogin}
+                                href="/login"
                             >
                                 INICIAR SESIÓN
-                            </button>
+                            </a>
                         )}
                     </li>
                     <li>
-                        <a className="text-black text-[18px] m-3 hover:text-[#c7114a]" href="/cart">
+                        <a className="text-black text-[18px] m-3 hover:text-[#c7114a]" href="/carrito">
                             CARRITO
                         </a>
                     </li>
