@@ -62,12 +62,14 @@ const Register = () => {
                 userData.address,
                 userData.phone
             );
-            console.log("Usuario registrado con éxito:", data);
-            router.push("/login"); // Redirigir al login después de un registro exitoso
+            alert("Usuario registrado con éxito:")
+            
+            router.push("/login");
         } catch (error) {
             setRegisterError(
                 error instanceof Error ? error.message : "Error desconocido"
             );
+            alert("Error al registrar usuario nuevo")
         } finally {
             setLoading(false);
         }

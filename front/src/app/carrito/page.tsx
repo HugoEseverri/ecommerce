@@ -5,7 +5,8 @@ import { useCart } from "@/app/context/cartContext";
 import Image from "next/image";
 
 const CartPage = () => {
-    const { cart, removeFromCart, clearCart } = useCart();
+    const { cart, removeFromCart, finishBuy ,clearCart } = useCart();
+    console.log("Contenido del carrito en CartPage:", cart);
 
     return (
         <main className="p-6">
@@ -20,6 +21,7 @@ const CartPage = () => {
                     <div className="mt-4">
                         <p className="text-xl text-black">Productos agregados al carrito:</p>
                     </div>
+                    <p>Contenido del carrito: {JSON.stringify(cart)}</p>
                     <ul className="mt-4">
                         {cart.map((product) => (
                             <li
@@ -48,7 +50,14 @@ const CartPage = () => {
                                 </button>
                             </li>
                         ))}
+
                     </ul>
+
+                    <button
+                    onClick={finishBuy}
+                    className="mt-6 p-2 bg-red-500 text-white rounded">
+                        Finalizar Compra
+                    </button>
                     <button
                         onClick={clearCart}
                         className="mt-6 p-2 bg-red-500 text-white rounded"

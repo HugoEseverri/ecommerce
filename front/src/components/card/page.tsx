@@ -17,7 +17,16 @@ const Card: React.FC<CardProps> = ({ product }) => {
 
     // Función que maneja el clic para agregar al carrito
     const handleAddToCart = () => {
-        addToCart(product); // Llama a addToCart pasando el producto
+
+        const cartProduct = {
+            id: product.id,
+            name: product.name,
+            price: product.price,
+            image: product.image,
+            quantity: 1, // Siempre inicia con cantidad 1 al agregar
+        };
+
+        addToCart(cartProduct); // Llama a addToCart pasando el producto
     };
 
     return (

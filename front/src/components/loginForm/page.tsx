@@ -75,6 +75,7 @@ function Login() {
         } finally {
             setLoading(false);
         }
+        alert(`Sesión iniciada con éxito`);
     };
 
     const toggleShowPassword = () => {

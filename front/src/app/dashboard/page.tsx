@@ -11,15 +11,14 @@ const Dashboard = () => {
     useEffect(() => {
         const token = localStorage.getItem("authToken");
         if (!token) {
-            // Si no hay token, redirigir al login
             router.push("/login");
         } else {
-            // Aquí podrías obtener los datos del usuario de la API si fuera necesario
-            // Por ahora, estoy simulando con datos estáticos de ejemplo
             const user = JSON.parse(localStorage.getItem("userData") || "{}");
-            setUserData(user);
+            const purchaseDetails = JSON.parse(localStorage.getItem("purchaseDetails") || "null");
+            setUserData({ ...user, purchaseDetails });
         }
     }, [router]);
+
 
     if (!userData) {
         return (
@@ -39,7 +38,23 @@ const Dashboard = () => {
                     <p className="text-black">Dirección: {userData.address}</p>
                     <p className="text-black">Teléfono: {userData.phone}</p>
                 </div>
-
+                {userData.purchaseDetails && (
+                    <div className="mt-6">
+                        <h2 className="text-xl font-semibold text-black mb-4">
+                            Detalles de tu última compra
+                        </h2>
+                        <ul className="space-y-2">
+                            {userData.purchaseDetails.items.map((item: any) => (
+                                <li key={item.id} className="text-black">
+                                    {item.quantity} x {item.name} - ${item.price}
+                                </li>
+                            ))}
+                        </ul>
+                        <p className="text-black mt-2">
+                            Fecha: {new Date(userData.purchaseDetails.date).toLocaleString()}
+                        </p>
+                    </div>
+                )}
                 <button
                     className="w-full bg-blue-500 text-white py-2 rounded-lg hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 mt-4"
                     onClick={() => {

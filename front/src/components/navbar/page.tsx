@@ -31,7 +31,7 @@ const Navbar: React.FC = () => {
                     <li>
                         {isAuthenticated ? (
                             <>
-                                <span className="text-black text-[18px] m-3">
+                                <span className="text-black text-[18px] m-3 hover:text-[#c7114a]" >
                                     <a href="/dashboard">MI CUENTA</a>
 
                                 </span>
@@ -54,6 +54,11 @@ const Navbar: React.FC = () => {
                     <li>
                         <a className="text-black text-[18px] m-3 hover:text-[#c7114a]" href="/carrito">
                             CARRITO
+                        </a>
+                    </li>
+                    <li>
+                        <a className="text-black text-[18px] m-3 hover:text-[#c7114a]" href="/register">
+                            REGISTRARSE
                         </a>
                     </li>
                 </ul>
