@@ -1,10 +1,11 @@
-"use client";
+"use client"
 
 import React, { createContext, useContext, useState, ReactNode, useEffect } from "react";
 import { StaticImageData } from "next/image";
+import { createOrderService } from "../services";
 
 // Interfaz para los productos del carrito
-interface CartProduct {
+export interface CartProduct {
     id: number;
     name: string;
     price: number;
@@ -17,8 +18,9 @@ interface CartContextProps {
     cart: CartProduct[];
     addToCart: (product: CartProduct) => void;
     removeFromCart: (productId: number) => void;
+    getTotalPrice: () => number;
     clearCart: () => void;
-    finishBuy: () => void;
+    handleFinishBuy: () => void;
 }
 
 const CartContext = createContext<CartContextProps | undefined>(undefined);
@@ -65,20 +67,42 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
         alert("Producto agregado al Carrito")
     };
 
-
-    const finishBuy = () => {
-        const purchaseDetails = {
-            items: cart,
-            date: new Date().toISOString(),
-        };
-    
-        // Guardar los detalles en el localStorage
-        localStorage.setItem("purchaseDetails", JSON.stringify(purchaseDetails));
-    
-        // Mostrar el alert y limpiar el carrito
-        alert("Compra realizada con éxito");
-        clearCart();
+    const getTotalPrice = () => {
+        return cart.reduce((total, product) => total + product.price * product.quantity, 0);
     };
+
+    const handleFinishBuy = async () => {
+        try {
+            const token = localStorage.getItem("authToken");
+            if (!token) {
+                throw new Error("No se encontró un token de autenticación.");
+            }
+    
+            console.log("Token de autenticación:", token); // Log para verificar el token
+    
+            // Obtener el userId desde localStorage
+            const userId = localStorage.getItem("userId");
+            if (!userId) {
+                throw new Error("No se encontró un ID de usuario.");
+            }
+    
+            // Verificar si el carrito tiene productos
+            if (cart.length === 0) {
+                throw new Error("El carrito está vacío.");
+            }
+    
+            // Llamar a la función createOrderService
+            await createOrderService(cart.map((item) => item.id), parseInt(userId), token);
+    
+            clearCart();  // Limpiar el carrito después de la compra exitosa
+        } catch (error) {
+            console.error("Error al finalizar la compra:", error);
+            alert("Hubo un problema al procesar la compra. Intenta nuevamente.");
+        }
+    };
+    
+    
+    
     
 
     const removeFromCart = (productId: number) => {
@@ -90,7 +114,7 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
     };
 
     return (
-        <CartContext.Provider value={{ cart, addToCart, removeFromCart, clearCart, finishBuy }}>
+        <CartContext.Provider value={{ cart, addToCart, removeFromCart, clearCart, handleFinishBuy, getTotalPrice }}>
             {children}
         </CartContext.Provider>
     );

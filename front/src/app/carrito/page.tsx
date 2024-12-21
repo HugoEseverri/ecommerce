@@ -5,7 +5,7 @@ import { useCart } from "@/app/context/cartContext";
 import Image from "next/image";
 
 const CartPage = () => {
-    const { cart, removeFromCart, finishBuy ,clearCart } = useCart();
+    const { cart, removeFromCart, handleFinishBuy, clearCart, getTotalPrice } = useCart();
     console.log("Contenido del carrito en CartPage:", cart);
 
     return (
@@ -28,7 +28,7 @@ const CartPage = () => {
                                 key={product.id}
                                 className="flex items-center justify-between border-b p-4"
                             >
-                                <div className="flex items-center">
+                                <div className="flex items-center w-[650px]">
                                     <Image
                                         src={product.image}
                                         alt={product.name}
@@ -37,9 +37,9 @@ const CartPage = () => {
                                         className="mr-4"
                                     />
                                     <div>
-                                        <h3 className="text-lg font-semibold">{product.name}</h3>
-                                        <p>Precio: ${product.price}</p>
-                                        <p>Cantidad: {product.quantity}</p>
+                                        <h3 className="text-lg font-semibold text-black">{product.name}</h3>
+                                        <p className="text-lg font-semibold text-black">Precio: ${product.price}</p>
+                                        <p className="text-lg font-semibold text-black">Cantidad: {product.quantity}</p>
                                     </div>
                                 </div>
                                 <button
@@ -50,12 +50,13 @@ const CartPage = () => {
                                 </button>
                             </li>
                         ))}
-
                     </ul>
-
+                    <div className="mt-4 text-xl font-bold text-black">
+                        Total: ${getTotalPrice()}
+                    </div>
                     <button
-                    onClick={finishBuy}
-                    className="mt-6 p-2 bg-red-500 text-white rounded">
+                        onClick={handleFinishBuy}
+                        className="mt-6 p-2 bg-red-500 text-white rounded">
                         Finalizar Compra
                     </button>
                     <button
