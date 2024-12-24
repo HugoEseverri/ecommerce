@@ -5,7 +5,7 @@ import instagram from "@/assets/img/instagram.png";
 
 const Footer: React.FC = () => {
     return (
-        <footer className="bg-[#05172D] min-h-[250px] ">
+        <footer className="bg-[#132f52] min-h-[250px] ">
             <div className="grid grid-cols-5 p-12 pl-[200px]">
                 <div className="flex flex-col">
                     <h3 className="p-3 text-[22px]">EXCLUSIVO</h3>

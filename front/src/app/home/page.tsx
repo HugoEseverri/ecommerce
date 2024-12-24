@@ -2,7 +2,7 @@ import React from "react";
 import Card from "../../components/card/page";
 import Etiquetas from "@/components/home/etiquetas/page";
 import Carousel from "@/components/home/carousel/page";
-import banner from "@/assets/img/BANNER-NOVEDADES.webp";
+import banner from "@/assets/img/novedadess.jpg";
 import { getProducts } from "../services";
 
 export default async function HomePage() {
@@ -10,13 +10,13 @@ export default async function HomePage() {
         const products = await getProducts();
 
         return (
-            <main>
+            <main className=" bg-gray-100">
                 <Carousel />
                 <h1>Productos</h1>
                 <Etiquetas />
                 <div className="flex justify-center">
                     <img
-                        className="w-[1175px]"
+                        className="w-[1000px]"
                         src={banner.src}
                         alt="Banner novedades"
                     />

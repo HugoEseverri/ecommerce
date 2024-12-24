@@ -4,8 +4,11 @@ import React, { useState, useEffect } from "react";
 import { validateField, validateLogin } from "@/app/utils/validations";
 import { userLogin } from "@/app/services";
 import { useRouter } from "next/navigation";
+import { useAuth } from "@/auth/AuthContext"; // Asegúrate de importar el hook
 
 function Login() {
+    const { setIsAuthenticated, setUserName } = useAuth(); // Desestructura setIsAuthenticated y setUserName desde el contexto
+
     const [userData, setUserData] = useState({
         username: "",
         password: "",
@@ -54,28 +57,31 @@ function Login() {
         }
 
         try {
-            const data = await userLogin(userData.username, userData.password); // Aquí se realiza la llamada real al backend
+            const data = await userLogin(userData.username, userData.password);
             console.log("Usuario autenticado con éxito:", data);
 
-            // Si la autenticación es exitosa
             if (data && data.token) {
-                // Guardamos el token y los datos reales del usuario
-                localStorage.setItem("authToken", data.token); // Guardar el token
-                localStorage.setItem("userData", JSON.stringify(data.user)); // Guardar los datos del usuario
+                // Guardamos el token y los datos del usuario
+                localStorage.setItem("authToken", data.token);
+                localStorage.setItem("userData", JSON.stringify(data.user));
 
-                // Redirigimos al dashboard
+                // Actualizar el estado en el AuthContext
+                setIsAuthenticated(true); // Actualiza el estado de autenticación
+                setUserName(data.user.name); // Actualiza el nombre del usuario
+
+                alert("Sesión iniciada con éxito");
+
+                // Redirige al dashboard o home
                 router.push("/dashboard");
             } else {
                 setLoginError("No se recibió un token válido.");
             }
         } catch (error) {
-            setLoginError(
-                error instanceof Error ? error.message : "Error desconocido"
-            );
+            setLoginError(error instanceof Error ? error.message : "Error desconocido");
+            alert("Usuario no registrado");
         } finally {
             setLoading(false);
         }
-        alert(`Sesión iniciada con éxito`);
     };
 
     const toggleShowPassword = () => {
@@ -83,11 +89,11 @@ function Login() {
     };
 
     return (
-        <div className="flex min-h-screen items-center justify-center bg-gray-100">
-            <div className="max-w-md bg-white rounded-lg shadow-md p-8 w-[500px]">
+        <div className="flex  items-center justify-center bg-gray-100">
+            <div className=" bg-white rounded-lg shadow-md p-8 w-[500px]">
                 <h1 className="text-2xl font-semibold text-gray-800 mb-6">Iniciar Sesión</h1>
                 <form onSubmit={handleOnSubmit} className="space-y-4">
-                    <div className="mb-4 ">
+                    <div className="mb-4">
                         <label htmlFor="username" className="block text-sm font-medium text-gray-700">
                             Usuario
                         </label>

@@ -1,9 +1,9 @@
 import React from "react";
 import { getProducts } from "@/app/services";
+import AddToCartButton from "@/components/addToCart/AddToCartButton"; // Importa el componente cliente
 
 const Page = async ({ params }: { params: { productID: string } }) => {
     const { productID } = params;
-    
     const products = await getProducts();
     const foundProduct = products.find(
         (product) => product.id === Number(productID)
@@ -19,13 +19,22 @@ const Page = async ({ params }: { params: { productID: string } }) => {
     }
 
     return (
-        <div className="w-[350px] h-[650px] bg-white border border-gray-300 rounded-lg shadow-lg overflow-hidden flex flex-col items-center m-[50px] p-10">
-            <div className="w-[350px] h-[330px] relative mb-4">
-                <img src={foundProduct.image as string} alt={foundProduct.name} className="h-[330px]" />
+        <div className="h-[850px] flex flex-col items-center p-10 justify-center">
+            <div className="flex items-center w-[1400px] border bg-white border-gray-300 rounded-lg shadow-lg overflow-hidden">
+                <div className="relative m-4">
+                    <img
+                        src={foundProduct.image as string}
+                        alt={foundProduct.name}
+                        className="w-[900px] h-[800px] object-cover"
+                    />
+                </div>
+                <div className="flex flex-col items-center w-[600px] min-w-[600px]">
+                    <h3 className="text-3xl text-center text-gray-800 mb-8">{foundProduct.name}</h3>
+                    <p className="text-xl text-center text-gray-500 m-5">{foundProduct.description}</p>
+                    <p className="text-xl font-semibold text-gray-900">Precio: ${foundProduct.price}</p>
+                    <AddToCartButton product={foundProduct} />
+                </div>
             </div>
-            <h3 className="text-xl font-semibold text-center text-gray-800">{foundProduct.name}</h3>
-            <p className="text-sm text-center text-gray-500 mt-2 mb-4">{foundProduct.description}</p>
-            <p className="text-lg font-semibold text-gray-900">Precio: ${foundProduct.price}</p>
         </div>
     );
 };

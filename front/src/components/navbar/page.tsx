@@ -3,62 +3,70 @@ import React from "react";
 import { useAuth } from "@/auth/AuthContext";
 import carrocompra from "@/assets/img/carrocompra.png";
 
+
 const Navbar: React.FC = () => {
     const { isAuthenticated, logout } = useAuth();
 
     return (
         <div className="bg-white flex justify-center p-9 items-center">
-            <a href="/" className="text-black text-4xl m-6">
-                MUNDO | TECH
+            <a
+                href="/"
+                className="text-black text-4xl m-6  transform transition-transform duration-500 group"
+            >
+                MUNDO | <span className="text-black group-hover:text-[#0071E3] transition-colors duration-200">TECH</span>
             </a>
-            <nav>
-                <ul className="flex justify-around m-6">
-                    <li>
-                        <a className="text-black text-[18px] m-3 hover:text-[#c7114a]" href="/">
+
+            <nav className="flex items-center">
+                <ul className="flex justify-around items-center m-6">
+                    <li className="hover:scale-110 transform motion-safe:transition-transform">
+                        <a className="text-black text-[18px] m-3 hover:text-[#0071E3] transform motion-safe:hover:scale-110" href="/">
                             INICIO
                         </a>
                     </li>
-                    <li>
-                        <a className="text-black text-[18px] m-3 hover:text-[#c7114a]" href="/home">
+                    <li className="hover:scale-110 transform motion-safe:transition-transform">
+                        <a className="text-black text-[18px] m-3 hover:text-[#0071E3]" href="/home">
                             PRODUCTOS
-                        </a>
-                    </li>
-                    <li>
-                        <a className="text-black text-[18px] m-3 hover:text-[#c7114a]" href="/dashboard">
-                            CONTACTO
                         </a>
                     </li>
                     <li>
                         {isAuthenticated ? (
                             <>
-                                <span className="text-black text-[18px] m-3 hover:text-[#c7114a]" >
-                                    <a href="/dashboard">MI CUENTA</a>
+                                <a
+                                    href="/dashboard"
+                                    className="text-black text-[18px] m-3 hover:text-[#0071E3] hover:scale-110 transform transition-transform duration-300 inline-block"
+                                >
+                                    MI CUENTA
+                                </a>
 
-                                </span>
                                 <button
-                                    className="text-black text-[18px] m-3 hover:text-[#c7114a]"
+                                    className="text-black text-[18px] m-3 hover:text-[#0071E3] hover:scale-110 transform transition-transform duration-300 inline-block"
                                     onClick={logout}
                                 >
                                     CERRAR SESIÓN
                                 </button>
+
+                                <a className="text-black text-[18px] m-3 hover:text-[#0071E3] hover:scale-110 transform transition-transform duration-300 inline-block" href="/carrito">
+                                    CARRITO
+                                </a>
+
                             </>
                         ) : (
                             <a
-                                className="text-black text-[18px] m-3 hover:text-[#c7114a]"
+                                className="text-black text-[18px] m-3 hover:text-[#0071E3] hover:scale-110 transform transition-transform duration-300 inline-block"
                                 href="/login"
                             >
                                 INICIAR SESIÓN
                             </a>
                         )}
                     </li>
-                    <li>
-                        <a className="text-black text-[18px] m-3 hover:text-[#c7114a]" href="/carrito">
-                            CARRITO
+                    <li className="hover:scale-110 transform motion-safe:transition-transform">
+                        <a className="text-black text-[18px] m-3 hover:text-[#0071E3]" href="/register">
+                            REGISTRARSE
                         </a>
                     </li>
-                    <li>
-                        <a className="text-black text-[18px] m-3 hover:text-[#c7114a]" href="/register">
-                            REGISTRARSE
+                    <li className="hover:scale-110 transform motion-safe:transition-transform">
+                        <a className="text-black text-[18px] m-3 hover:text-[#0071E3]" href="/dashboard">
+                            CONTACTO
                         </a>
                     </li>
                 </ul>

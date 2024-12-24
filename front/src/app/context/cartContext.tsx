@@ -78,23 +78,23 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
                 throw new Error("No se encontró un token de autenticación.");
             }
     
-            console.log("Token de autenticación:", token); // Log para verificar el token
+            console.log("Token de autenticación:", token);
     
-            // Obtener el userId desde localStorage
+            
             const userId = localStorage.getItem("userId");
             if (!userId) {
                 throw new Error("No se encontró un ID de usuario.");
             }
     
-            // Verificar si el carrito tiene productos
+            
             if (cart.length === 0) {
                 throw new Error("El carrito está vacío.");
             }
     
-            // Llamar a la función createOrderService
+            
             await createOrderService(cart.map((item) => item.id), parseInt(userId), token);
-    
-            clearCart();  // Limpiar el carrito después de la compra exitosa
+            alert("Compra realizada con éxito")
+            clearCart();
         } catch (error) {
             console.error("Error al finalizar la compra:", error);
             alert("Hubo un problema al procesar la compra. Intenta nuevamente.");

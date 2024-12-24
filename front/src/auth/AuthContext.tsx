@@ -9,6 +9,8 @@ interface AuthContextType {
     authError: string | null;
     login: (username: string, password: string) => Promise<void>;
     logout: () => void;
+    setIsAuthenticated: React.Dispatch<React.SetStateAction<boolean>>;  // Agrega esto
+    setUserName: React.Dispatch<React.SetStateAction<string | null>>;  // Agrega esto
 }
 
 // Inicializamos el contexto como `null`
@@ -30,7 +32,6 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
     const [authError, setAuthError] = useState<string | null>(null);
 
     useEffect(() => {
-        // Revisar si hay un token en localStorage al montar el componente
         const token = localStorage.getItem("authToken");
         if (token) {
             const userData = JSON.parse(localStorage.getItem("userData") || "{}");
@@ -40,19 +41,17 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
             setIsAuthenticated(false);
         }
     }, []);
-
+    
     const login = async (username: string, password: string) => {
         try {
-            // Llamamos al servicio de login, el cual devuelve el token y los datos del usuario
             const data = await userLogin(username, password);
 
             if (data && data.token) {
-                // Guardamos el token y los datos reales del usuario
                 localStorage.setItem("authToken", data.token);
-                localStorage.setItem("userData", JSON.stringify(data.user)); // Cambia esto si el backend devuelve más datos
+                localStorage.setItem("userData", JSON.stringify(data.user)); 
                 setIsAuthenticated(true);
-                setUserName(data.user.name); // Guarda el nombre del usuario
-                setAuthError(null); // Reseteamos errores si el login es exitoso
+                setUserName(data.user.name);
+                setAuthError(null);
             } else {
                 setAuthError("No se recibió un token válido.");
             }
@@ -63,16 +62,23 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
     };
 
     const logout = () => {
-        // Al cerrar sesión, limpiar los datos de localStorage y resetear el estado
         localStorage.removeItem("authToken");
         localStorage.removeItem("userData");
         setIsAuthenticated(false);
         setUserName(null);
-        setAuthError(null); // Limpiamos errores al cerrar sesión
+        setAuthError(null);
     };
 
     return (
-        <AuthContext.Provider value={{ isAuthenticated, userName, authError, login, logout }}>
+        <AuthContext.Provider value={{ 
+            isAuthenticated, 
+            userName, 
+            authError, 
+            login, 
+            logout, 
+            setIsAuthenticated, // Agrega setIsAuthenticated
+            setUserName // Agrega setUserName
+        }}>
             {children}
         </AuthContext.Provider>
     );

@@ -1,9 +1,9 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
-import banner from "@/assets/img/BANNER-HOME.webp"
-import bannerDos from "@/assets/img/BANNER-HOME-DOS.webp"
-import bannerTres from "@/assets/img/BANNER-HOME-TRES.webp"
+import banner from "@/assets/img/iPhone 11 iPhone 11 PRO Max.jpg"
+import bannerDos from "@/assets/img/bannerDos.jpg"
+import bannerTres from "@/assets/img/Add a heading.jpg"
 const images =[banner, bannerDos, bannerTres];
 
 const Carousel: React.FC = () => {
@@ -39,7 +39,7 @@ const Carousel: React.FC = () => {
                         key={index}
                         onClick={() => setCurrentIndex(index)}
                         className={`w-3 h-3 rounded-full ${
-                            currentIndex === index ? 'bg-white' : 'bg-gray-500'
+                            currentIndex === index ? 'bg-blue-500' : 'bg-gray-500'
                         }`}
                     ></button>
                 ))}

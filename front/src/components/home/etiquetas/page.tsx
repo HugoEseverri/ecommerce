@@ -1,32 +1,32 @@
 import React from 'react';
-import televisores from "@/assets/img/television.png"
+import airpods from "@/assets/img/airpods.png"
 import celulares from "@/assets/img/telefono-inteligente.png"
-import gaming from "@/assets/img/juego.png"
-import hogar from "@/assets/img/articulos-para-el-hogar.png"
-import computadoras from "@/assets/img/computadora.png"
-import consolas from "@/assets/img/estacion-de-juegos.png"
+import ipad from "@/assets/img/tableta.png"
+import reloj from "@/assets/img/reloj.png"
+import macbook from "@/assets/img/macbook-pro.png"
+import homepod from "@/assets/img/homepod.png"
 
 const Etiquetas: React.FC = () => {
     return (
         <div>
             <ul className="grid grid-cols-3 grid-rows-2 gap-5 p-5">
-                <li className="etiqueta-base flex items-center justify-center text-center bg-[white] text-gray m-[20px] h-[80px]">
-                    <img src={gaming.src} alt="Gaming" className="w-6 h-6 mr-2" /> GAMING
+                <li className="etiqueta-base flex items-center justify-center text-center  bg-gray-100 text-gray m-[20px] h-[80px]">
+                    <img src={celulares.src} alt="Gaming" className="w-6 h-6 mr-2" /> iPhone
                 </li>
-                <li className="etiqueta-base flex items-center justify-center text-center bg-[white] text-gray m-[20px] h-[80px]">
-                    <img src={celulares.src} alt="Celulares" className="w-6 h-6 mr-2" /> CELULARES
+                <li className="etiqueta-base flex items-center justify-center text-center  bg-gray-100 text-gray m-[20px] h-[80px]">
+                    <img src={macbook.src} alt="Celulares" className="w-6 h-6 mr-2" /> MacBook
                 </li>
-                <li className="etiqueta-base flex items-center justify-center text-center bg-[white] text-gray m-[20px] h-[80px]">
-                    <img src={televisores.src} alt="Televisores" className="w-6 h-6 mr-2" /> TELEVISORES
+                <li className="etiqueta-base flex items-center justify-center text-center  bg-gray-100 text-gray m-[20px] h-[80px]">
+                    <img src={airpods.src} alt="Televisores" className="w-6 h-6 mr-2" /> AirPods
                 </li>
-                <li className="etiqueta-base flex items-center justify-center text-center bg-[white] text-gray m-[20px] h-[80px]">
-                    <img src={hogar.src} alt="Hogar" className="w-6 h-6 mr-2" /> HOGAR
+                <li className="etiqueta-base flex items-center justify-center text-center  bg-gray-100 text-gray m-[20px] h-[80px]">
+                    <img src={reloj.src} alt="Hogar" className="w-6 h-6 mr-2" /> iWatch
                 </li>
-                <li className="etiqueta-base flex items-center justify-center text-center bg-[white] text-gray m-[20px] h-[80px]">
-                    <img src={computadoras.src} alt="Computadoras" className="w-6 h-6 mr-2" /> COMPUTADORAS
+                <li className="etiqueta-base flex items-center justify-center text-center  bg-gray-100 text-gray m-[20px] h-[80px]">
+                    <img src={ipad.src} alt="Computadoras" className="w-6 h-6 mr-2" /> iPad
                 </li>
-                <li className="etiqueta-base flex items-center justify-center text-center bg-[white] text-gray m-[20px] h-[80px]">
-                    <img src={consolas.src} alt="Consolas" className="w-6 h-6 mr-2" /> CONSOLAS
+                <li className="etiqueta-base flex items-center justify-center text-center  bg-gray-100 text-gray m-[20px] h-[80px]">
+                    <img src={homepod.src} alt="Consolas" className="w-6 h-6 mr-2" /> HomePod
                 </li>
             </ul>
         </div>

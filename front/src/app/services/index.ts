@@ -1,6 +1,5 @@
 import { IProducts } from "@/interfaces/products.interface";
-import { useCart } from "../context/cartContext";
-import { CartProduct } from "../context/cartContext";
+
 
 const apiURL = process.env.NEXT_PUBLIC_API_URL;
 

@@ -24,5 +24,5 @@ body {
 
 
 .etiqueta-base {
-  @apply flex items-center justify-center text-center text-lg bg-white text-gray-700 m-5 h-[80px] hover:bg-[#c7114a] hover:text-white hover:scale-105  transition-colors duration-300;
+  @apply flex items-center justify-center text-center text-lg  bg-gray-100 text-gray-700 m-5 h-[80px] hover:bg-[#0071E3] hover:text-white hover:scale-105  transition-colors duration-300;
 }
