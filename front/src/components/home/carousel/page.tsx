@@ -4,7 +4,8 @@ import React, { useState, useEffect } from 'react';
 import banner from "@/assets/img/iPhone 11 iPhone 11 PRO Max.jpg"
 import bannerDos from "@/assets/img/bannerDos.jpg"
 import bannerTres from "@/assets/img/Add a heading.jpg"
-const images =[banner, bannerDos, bannerTres];
+import Image from 'next/image';
+const images = [banner, bannerDos, bannerTres];
 
 const Carousel: React.FC = () => {
     const [currentIndex, setCurrentIndex] = useState(0);
@@ -24,13 +25,14 @@ const Carousel: React.FC = () => {
                 style={{ transform: `translateX(-${currentIndex * 100}%)` }}
             >
                 {images.map((src, index) => (
-                    <img
+                    <Image
                         key={index}
-                        src={src.src}
+                        src={src}
                         alt={`Slide ${index + 1}`}
                         className="w-full h-full object-cover"
                     />
                 ))}
+
             </div>
 
             <div className="absolute bottom-5 left-0 right-0 flex justify-center space-x-2">
@@ -38,9 +40,8 @@ const Carousel: React.FC = () => {
                     <button
                         key={index}
                         onClick={() => setCurrentIndex(index)}
-                        className={`w-3 h-3 rounded-full ${
-                            currentIndex === index ? 'bg-blue-500' : 'bg-gray-500'
-                        }`}
+                        className={`w-3 h-3 rounded-full ${currentIndex === index ? 'bg-blue-500' : 'bg-gray-500'
+                            }`}
                     ></button>
                 ))}
             </div>
@@ -48,4 +49,5 @@ const Carousel: React.FC = () => {
     );
 };
 
-export default Carousel;
+
+export default Carousel

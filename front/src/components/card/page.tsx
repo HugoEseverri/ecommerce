@@ -33,13 +33,15 @@ const Card: React.FC<CardProps> = ({ product }) => {
         <div className="w-[400px] h-[650px] bg-white border border-gray-300 rounded-lg shadow-lg overflow-hidden flex flex-col items-center m-[50px] p-10 hover:border-[#0071E3] transition-colors duration-300">
             <Link href={`/product/${product.id}`}>
                 <div className="cursor-pointer w-[350px] h-[270px] relative mb-4 overflow-hidden">
-                    <Image
-                        src={product.image}
-                        alt={product.name}
-                        layout="fill"
-                        objectFit="cover"
-                        className="absolute top-0 left-0"
-                    />
+                <Image
+                    src={product.image}
+                    alt={product.name}
+                    width={350}
+                    height={270}
+                    className="w-full h-full object-cover" // Usamos las clases de Tailwind para object-fit
+                />
+
+
                 </div>
 
                 <h3 className="cursor-pointer text-xl text-center text-gray-800 p-[15px] font-semibold">

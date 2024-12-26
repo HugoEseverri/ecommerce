@@ -3,7 +3,7 @@ import { getProducts } from "@/app/services";
 import AddToCartButton from "@/components/addToCart/AddToCartButton"; // Importa el componente cliente
 
 const Page = async ({ params }: { params: { productID: string } }) => {
-    const { productID } = params;
+    const { productID } = await params;
     const products = await getProducts();
     const foundProduct = products.find(
         (product) => product.id === Number(productID)

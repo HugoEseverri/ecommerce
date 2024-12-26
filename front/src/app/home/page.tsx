@@ -4,6 +4,7 @@ import Etiquetas from "@/components/home/etiquetas/page";
 import Carousel from "@/components/home/carousel/page";
 import banner from "@/assets/img/novedadess.jpg";
 import { getProducts } from "../services";
+import Image from "next/image";
 
 export default async function HomePage() {
     try {
@@ -15,11 +16,12 @@ export default async function HomePage() {
                 <h1>Productos</h1>
                 <Etiquetas />
                 <div className="flex justify-center">
-                    <img
+                    <Image
                         className="w-[1000px]"
-                        src={banner.src}
+                        src={banner}
                         alt="Banner novedades"
                     />
+
                 </div>
                 <div className="flex justify-center flex-wrap gap-4">
                     {products && products.length > 0 ? (

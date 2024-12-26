@@ -158,51 +158,6 @@ export const fetchOrders = async (token: string) => {
 };
 
 
-// service.ts
-
-// export const finishBuy = async (cart: Array<CartProduct>) => {
-//     const token = localStorage.getItem("authToken");
-//     if (!token) {
-//         alert("No estás autenticado. Por favor, inicia sesión.");
-//         return;
-//     }
-
-//     const purchaseDetails = {
-//         products: number[],
-//         userId: Number,
-//         token: string, // Incluye el token en el cuerpo de la solicitud
-//     };
-
-//     try {
-//         const response = await fetch(`${apiURL}/orders`, {
-//             method: "POST",
-//             headers: {
-//                 "Content-Type": "application/json",
-//                 Authorization: token,
-//             },
-//             body: JSON.stringify(purchaseDetails),
-//         });
-
-//         if (!response.ok) {
-//             throw new Error("Error al procesar la compra.");
-//         }
-
-//         const data = await response.json();
-//         console.log("Compra registrada correctamente:", data);
-
-//         // Mostrar mensaje de éxito y limpiar el carrito
-//         alert("Compra realizada con éxito");
-
-//         // Llamar a la función `clearCart` desde tu CartContext
-//         const { clearCart } = useCart();
-//         clearCart();  // Esto limpiará el carrito desde tu contexto
-
-//     } catch (error) {
-//         console.error("Error al realizar la compra:", error);
-//         alert("Hubo un problema al procesar tu compra. Intenta nuevamente.");
-//     }
-// };
-
 export async function createOrderService(
     products: number[],
     userID: number,
