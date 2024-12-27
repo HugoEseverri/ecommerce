@@ -19,7 +19,7 @@ const Page = async ({ params }: { params: { productID: string } }) => {
     }
 
     return (
-        <div className="h-[850px] flex flex-col items-center p-10 justify-center">
+        <div className="h-[850px] flex flex-col items-center p-10 justify-center bg-gray-100">
             <div className="flex items-center w-[1400px] border bg-white border-gray-300 rounded-lg shadow-lg overflow-hidden">
                 <div className="relative m-4">
                     <img

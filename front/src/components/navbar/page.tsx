@@ -24,7 +24,7 @@ const Navbar: React.FC = () => {
                         </a>
                     </li>
                     <li className="hover:scale-110 transform motion-safe:transition-transform">
-                        <a className="text-black text-[18px] m-3 hover:text-[#0071E3]" href="/home">
+                        <a className="text-black text-[18px] m-3 hover:text-[#0071E3]" href="/product">
                             PRODUCTOS
                         </a>
                     </li>
@@ -65,7 +65,7 @@ const Navbar: React.FC = () => {
                         </a>
                     </li>
                     <li className="hover:scale-110 transform motion-safe:transition-transform">
-                        <a className="text-black text-[18px] m-3 hover:text-[#0071E3]" href="/dashboard">
+                        <a className="text-black text-[18px] m-3 hover:text-[#0071E3]" href="/contacto">
                             CONTACTO
                         </a>
                     </li>
