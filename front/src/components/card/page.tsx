@@ -21,16 +21,19 @@ const Card: React.FC<CardProps> = ({ product }) => {
         const cartProduct = {
             id: product.id,
             name: product.name,
+            description: product.description,
             price: product.price,
+            stock: product.stock,
             image: product.image,
-            quantity: 1, // Siempre inicia con cantidad 1 al agregar
+            categoryId: product.categoryId,
+            
         };
 
         addToCart(cartProduct); // Llama a addToCart pasando el producto
     };
 
     return (
-        <div className="w-[400px] h-[650px] bg-white border border-gray-300 rounded-lg shadow-lg overflow-hidden flex flex-col items-center m-[50px] p-10 hover:border-[#0071E3] transition-colors duration-300">
+        <div className="w-[400px] h-[650px] bg-white border border-gray-300 rounded-lg shadow-lg overflow-hidden flex flex-col items-center m-[50px] p-10 hover:border-2 hover:border-[#0071e38f] transition-colors duration-300">
             <Link href={`/product/${product.id}`}>
                 <div className="cursor-pointer w-[350px] h-[270px] relative mb-4 overflow-hidden">
                 <Image
@@ -38,7 +41,7 @@ const Card: React.FC<CardProps> = ({ product }) => {
                     alt={product.name}
                     width={350}
                     height={270}
-                    className="w-full h-full object-cover" // Usamos las clases de Tailwind para object-fit
+                    className="w-full h-full object-cover"
                 />
 
 
@@ -57,7 +60,7 @@ const Card: React.FC<CardProps> = ({ product }) => {
                 {isAuthenticated ? (
                     <button
                         onClick={handleAddToCart}
-                        className="text-lg text-white p-[10px]  rounded-lg bg-blue-500 border-opacity-100 m-[15px]"
+                        className="text-lg text-white p-[10px]  rounded-lg bg-blue-500 border-opacity-100 m-[15px]  hover:bg-[#0035e3d3] transition-colors duration-300"
                     >
                         Agregar al Carrito
                     </button>

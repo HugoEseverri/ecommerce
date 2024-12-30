@@ -1,5 +1,5 @@
 import React from "react";
-import { getProducts } from "@/app/services";
+import { getProducts } from "@/app/services/products";
 import AddToCartButton from "@/components/addToCart/AddToCartButton"; // Importa el componente cliente
 
 const Page = async ({ params }: { params: { productID: string } }) => {

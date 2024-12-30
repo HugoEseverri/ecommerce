@@ -1,5 +1,5 @@
 import React from "react";
-import { getProducts } from "@/app/services";
+import { getProducts } from "@/app/services/products";
 import ProductDetails from "@/components/products/productsID/productsID";
 
 const Page = async () => {

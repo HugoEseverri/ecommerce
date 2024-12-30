@@ -6,11 +6,12 @@ import Image from "next/image";
 
 const CartPage = () => {
     const { cart, removeFromCart, handleFinishBuy, clearCart, getTotalPrice } = useCart();
-    console.log("Contenido del carrito en CartPage:", cart);
 
     return (
         <main className="p-6 bg-gray-100 flex justify-center min-h-screen">
-            <div className="bg-white p-4 border rounded-lg w-[1000px] ">
+            <div className="bg-white p-4 border rounded-lg min-h-[200px] w-[800px]">
+
+
                 <h1 className="text-2xl font-bold text-black">Carrito de Compras</h1>
                 {cart.length === 0 ? (
                     <div className="mt-4">
@@ -21,7 +22,7 @@ const CartPage = () => {
                     <>
                         <div className="mt-4">
                             <p className="text-xl text-black">Productos agregados al carrito:</p>
-                            <hr className="bg-black h-0.5"/>
+                            <hr className="bg-black h-0.5" />
                         </div>
                         <ul className="mt-4">
                             {cart.map((product) => (
@@ -31,7 +32,7 @@ const CartPage = () => {
                                 >
                                     <div className="flex items-center w-[650px]">
                                         <Image
-                                            src={product.image}
+                                            src={typeof product.image === "string" ? product.image : product.image.src}
                                             alt={product.name}
                                             width={80}
                                             height={80}
@@ -40,7 +41,6 @@ const CartPage = () => {
                                         <div>
                                             <h3 className="text-lg font-semibold text-black">{product.name}</h3>
                                             <p className="text-lg font-semibold text-black">Precio: ${product.price}</p>
-                                            <p className="text-lg font-semibold text-black">Cantidad: {product.quantity}</p>
                                         </div>
                                     </div>
                                     <button
@@ -55,22 +55,26 @@ const CartPage = () => {
                         <div className="mt-4 text-xl font-bold text-black">
                             Total: ${getTotalPrice()}
                         </div>
-                        <button
-                            onClick={handleFinishBuy}
-                            className="m-6 p-2 bg-red-500 text-white rounded">
-                            Finalizar Compra
-                        </button>
-                        <button
-                            onClick={clearCart}
-                            className="mt-6 p-2 bg-red-500 text-white rounded"
-                        >
-                            Vaciar Carrito
-                        </button>
+                        <div className="flex justify-end space-x-4">
+                            <button
+                                onClick={handleFinishBuy}
+                                className="p-2 bg-blue-500 text-white rounded"
+                            >
+                                Finalizar Compra
+                            </button>
+                            <button
+                                onClick={clearCart}
+                                className="p-2 bg-red-500 text-white rounded"
+                            >
+                                Vaciar Carrito
+                            </button>
+                        </div>
                     </>
                 )}
             </div>
         </main>
     );
 };
+
 
 export default CartPage;

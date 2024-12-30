@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect } from "react";
 import { validateField, validateLogin } from "@/app/utils/validations";
-import { userLogin } from "@/app/services";
+import { userLogin } from "@/app/services/products";
 import { useRouter } from "next/navigation";
 import { useAuth } from "@/auth/AuthContext"; // Asegúrate de importar el hook
 

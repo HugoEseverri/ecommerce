@@ -2,11 +2,11 @@
 
 import React, { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
-import { fetchOrders } from "@/app/services";
-import { useAuth } from "@/auth/AuthContext"; // Importa el contexto de autenticación
+import { fetchOrders } from "@/app/services/orders";
+import { useAuth } from "@/auth/AuthContext";
 
 const Dashboard = () => {
-    const { logout } = useAuth(); // Obtén la función logout del contexto de autenticación
+    const { logout } = useAuth(); 
     const [userData, setUserData] = useState<any>(null);
     const [orders, setOrders] = useState<any[]>([]);
     const [loadingOrders, setLoadingOrders] = useState<boolean>(false);
@@ -65,8 +65,8 @@ const Dashboard = () => {
                 <button
                     className="w-full bg-blue-500 text-white py-2 rounded-lg hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 mt-4"
                     onClick={() => {
-                        logout(); // Llamar a logout del contexto
-                        router.push("/login"); // Redirigir al login
+                        logout();
+                        router.push("/login");
                     }}
                 >
                     Cerrar Sesión
@@ -92,7 +92,7 @@ const Dashboard = () => {
                                 <ul className="space-y-2">
                                     {order.products.map((product: any) => (
                                         <li key={product.id} className="text-black">
-                                            {product.quantity} x {product.name} - $
+                                            {product.name} - $
                                             {product.price}
                                         </li>
                                     ))}

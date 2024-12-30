@@ -2,7 +2,7 @@ import React from "react";
 import Card from "@/components/card/page";
 import Etiquetas from "@/components/home/etiquetas/page";
 import Carousel from "@/components/home/carousel/page";
-import { getProducts } from "@/app/services";
+import { getProducts } from "@/app/services/products";
 import Link from "next/link";
 
 export default async function HomePage() {
@@ -16,7 +16,7 @@ export default async function HomePage() {
                 <Etiquetas />
                 <Link href={`/product`} >
                     <div className="flex flex-col justify-center items-start ml-[230px] hover:text-blue-700 group">
-                        <h2 className="text-black text-2xl group-hover:text-blue-700">Productos</h2>
+                        <h2 className="text-black text-3xl group-hover:text-blue-700">Productos</h2>
                         <hr className="w-[1440px] h-1 bg-black group-hover:bg-blue-600" />
                     </div>
                 </Link>

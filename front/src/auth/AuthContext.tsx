@@ -1,6 +1,6 @@
 "use client";
 import React, { createContext, useState, useContext, ReactNode, useEffect } from "react";
-import { userLogin } from "@/app/services"; // Asegúrate de importar el servicio de login
+import { userLogin } from "@/app/services/products"; // Asegúrate de importar el servicio de login
 
 // Definimos la interfaz para el tipo del contexto
 interface AuthContextType {
@@ -25,7 +25,7 @@ export const useAuth = (): AuthContextType => {
     return context;
 };
 
-// Componente proveedor que envuelve la aplicación
+
 export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
     const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false);
     const [userName, setUserName] = useState<string | null>(null);
@@ -76,8 +76,8 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
             authError, 
             login, 
             logout, 
-            setIsAuthenticated, // Agrega setIsAuthenticated
-            setUserName // Agrega setUserName
+            setIsAuthenticated,
+            setUserName
         }}>
             {children}
         </AuthContext.Provider>

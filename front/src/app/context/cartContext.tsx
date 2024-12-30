@@ -1,19 +1,30 @@
-"use client"
+"use client";
 
 import React, { createContext, useContext, useState, ReactNode, useEffect } from "react";
 import { StaticImageData } from "next/image";
-import { createOrderService } from "../services";
+import { createOrderService } from "../services/orders";
 
-// Interfaz para los productos del carrito
+
 export interface CartProduct {
     id: number;
     name: string;
+    description: string;
     price: number;
+    stock: number;
     image: string | StaticImageData;
-    quantity: number;
+    categoryId: number;
 }
 
-// Contexto y proveedor
+
+export interface Order {
+    id: number;
+    status: string;
+    date: Date;
+    userId: number;
+    products: { id: number }[];
+}
+
+
 interface CartContextProps {
     cart: CartProduct[];
     addToCart: (product: CartProduct) => void;
@@ -25,7 +36,7 @@ interface CartContextProps {
 
 const CartContext = createContext<CartContextProps | undefined>(undefined);
 
-// Hook para usar el contexto
+
 export const useCart = () => {
     const context = useContext(CartContext);
     if (!context) {
@@ -37,13 +48,12 @@ export const useCart = () => {
 export const CartProvider = ({ children }: { children: ReactNode }) => {
     const [cart, setCart] = useState<CartProduct[]>([]);
 
-    // Cargar el carrito desde localStorage cuando el componente se monta en el cliente
     useEffect(() => {
         if (typeof window !== "undefined") {
             const savedCart = localStorage.getItem("cart");
             setCart(savedCart ? JSON.parse(savedCart) : []);
         }
-    }, []); // Este efecto se ejecuta solo una vez después del primer renderizado
+    }, []);
 
     useEffect(() => {
         if (typeof window !== "undefined") {
@@ -55,20 +65,26 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
     const addToCart = (product: CartProduct) => {
         setCart((prevCart) => {
             const existingProduct = prevCart.find((item) => item.id === product.id);
+
             if (existingProduct) {
-                return prevCart.map((item) =>
-                    item.id === product.id
-                        ? { ...item, quantity: item.quantity + 1 }
-                        : item
-                );
+                if (existingProduct.stock > 1) {
+                    return prevCart.map((item) =>
+                        item.id === product.id
+                            ? { ...item, stock: item.stock - 1 }
+                            : item
+                    );
+                }
+                alert("No hay más stock disponible");
+                return prevCart;
             }
-            return [...prevCart, { ...product, quantity: 1 }];
+            return [...prevCart, { ...product, stock: product.stock - 1 }];
         });
-        alert("Producto agregado al Carrito")
+
+        alert("Producto agregado al carrito");
     };
 
     const getTotalPrice = () => {
-        return cart.reduce((total, product) => total + product.price * product.quantity, 0);
+        return cart.reduce((total, product) => total + product.price, 0);
     };
 
     const handleFinishBuy = async () => {
@@ -78,31 +94,26 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
                 throw new Error("No se encontró un token de autenticación.");
             }
     
-            console.log("Token de autenticación:", token);
-    
-            
             const userId = localStorage.getItem("userId");
             if (!userId) {
                 throw new Error("No se encontró un ID de usuario.");
             }
     
-            
             if (cart.length === 0) {
                 throw new Error("El carrito está vacío.");
             }
     
-            
-            await createOrderService(cart.map((item) => item.id), parseInt(userId), token);
-            alert("Compra realizada con éxito")
+
+            const productIds = cart.map((item) => item.id);
+    
+            const order: Order = await createOrderService(productIds, parseInt(userId, 10), token);
+            alert(`Compra realizada con éxito. Número de orden: ${order.id}`);
             clearCart();
         } catch (error) {
             console.error("Error al finalizar la compra:", error);
             alert("Hubo un problema al procesar la compra. Intenta nuevamente.");
         }
     };
-    
-    
-    
     
 
     const removeFromCart = (productId: number) => {
@@ -114,7 +125,16 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
     };
 
     return (
-        <CartContext.Provider value={{ cart, addToCart, removeFromCart, clearCart, handleFinishBuy, getTotalPrice }}>
+        <CartContext.Provider
+            value={{
+                cart,
+                addToCart,
+                removeFromCart,
+                clearCart,
+                handleFinishBuy,
+                getTotalPrice,
+            }}
+        >
             {children}
         </CartContext.Provider>
     );

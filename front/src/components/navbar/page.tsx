@@ -2,41 +2,41 @@
 import React from "react";
 import { useAuth } from "@/auth/AuthContext";
 import carrocompra from "@/assets/img/carrocompra.png";
-
+import Link from "next/link";
 
 const Navbar: React.FC = () => {
     const { isAuthenticated, logout } = useAuth();
 
     return (
         <div className="bg-white flex justify-center p-9 items-center">
-            <a
+            <Link
                 href="/"
-                className="text-black text-4xl m-6  transform transition-transform duration-500 group"
+                className="text-black text-4xl m-6 transform transition-transform duration-500 group"
             >
                 MUNDO | <span className="text-black group-hover:text-[#0071E3] transition-colors duration-200">TECH</span>
-            </a>
+            </Link>
 
             <nav className="flex items-center">
                 <ul className="flex justify-around items-center m-6">
                     <li className="hover:scale-110 transform motion-safe:transition-transform">
-                        <a className="text-black text-[18px] m-3 hover:text-[#0071E3] transform motion-safe:hover:scale-110" href="/">
+                        <Link className="text-black text-[18px] m-3 hover:text-[#0071E3] transform motion-safe:hover:scale-110" href="/">
                             INICIO
-                        </a>
+                        </Link>
                     </li>
                     <li className="hover:scale-110 transform motion-safe:transition-transform">
-                        <a className="text-black text-[18px] m-3 hover:text-[#0071E3]" href="/product">
+                        <Link className="text-black text-[18px] m-3 hover:text-[#0071E3]" href="/product">
                             PRODUCTOS
-                        </a>
+                        </Link>
                     </li>
                     <li>
                         {isAuthenticated ? (
                             <>
-                                <a
+                                <Link
                                     href="/dashboard"
                                     className="text-black text-[18px] m-3 hover:text-[#0071E3] hover:scale-110 transform transition-transform duration-300 inline-block"
                                 >
                                     MI CUENTA
-                                </a>
+                                </Link>
 
                                 <button
                                     className="text-black text-[18px] m-3 hover:text-[#0071E3] hover:scale-110 transform transition-transform duration-300 inline-block"
@@ -45,29 +45,31 @@ const Navbar: React.FC = () => {
                                     CERRAR SESIÓN
                                 </button>
 
-                                <a className="text-black text-[18px] m-3 hover:text-[#0071E3] hover:scale-110 transform transition-transform duration-300 inline-block" href="/carrito">
+                                <Link
+                                    href="/carrito"
+                                    className="text-black text-[18px] m-3 hover:text-[#0071E3] hover:scale-110 transform transition-transform duration-300 inline-block"
+                                >
                                     CARRITO
-                                </a>
-
+                                </Link>
                             </>
                         ) : (
-                            <a
-                                className="text-black text-[18px] m-3 hover:text-[#0071E3] hover:scale-110 transform transition-transform duration-300 inline-block"
+                            <Link
                                 href="/login"
+                                className="text-black text-[18px] m-3 hover:text-[#0071E3] hover:scale-110 transform transition-transform duration-300 inline-block"
                             >
                                 INICIAR SESIÓN
-                            </a>
+                            </Link>
                         )}
                     </li>
                     <li className="hover:scale-110 transform motion-safe:transition-transform">
-                        <a className="text-black text-[18px] m-3 hover:text-[#0071E3]" href="/register">
+                        <Link className="text-black text-[18px] m-3 hover:text-[#0071E3]" href="/register">
                             REGISTRARSE
-                        </a>
+                        </Link>
                     </li>
                     <li className="hover:scale-110 transform motion-safe:transition-transform">
-                        <a className="text-black text-[18px] m-3 hover:text-[#0071E3]" href="/contacto">
+                        <Link className="text-black text-[18px] m-3 hover:text-[#0071E3]" href="/contacto">
                             CONTACTO
-                        </a>
+                        </Link>
                     </li>
                 </ul>
             </nav>

@@ -1,6 +1,6 @@
 import React from "react";
 import Card from "@/components/card/page";
-import { getProducts } from "@/app/services";
+import { getProducts } from "@/app/services/products";
 
 
 export default async function pageProduct() {
