@@ -2,9 +2,9 @@
 
 import React, { useState, useEffect } from "react";
 import { validateField, validateLogin } from "@/app/utils/validations";
-import { userLogin } from "@/app/services/products";
+import { userLogin } from "@/app/services/login";
 import { useRouter } from "next/navigation";
-import { useAuth } from "@/auth/AuthContext"; // Asegúrate de importar el hook
+import { useAuth } from "@/auth/AuthContext";
 
 function Login() {
     const { setIsAuthenticated, setUserName } = useAuth(); // Desestructura setIsAuthenticated y setUserName desde el contexto

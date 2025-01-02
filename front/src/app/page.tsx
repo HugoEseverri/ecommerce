@@ -12,7 +12,6 @@ export default async function HomePage() {
         return (
             <main className=" bg-gray-100">
                 <Carousel />
-                <h1>Productos</h1>
                 <Etiquetas />
                 <Link href={`/product`} >
                     <div className="flex flex-col justify-center items-start ml-[230px] hover:text-blue-700 group">

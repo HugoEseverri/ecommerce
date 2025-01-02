@@ -4,7 +4,7 @@ import React from "react";
 import { useCart } from "@/app/context/cartContext";
 import { StaticImageData } from "next/image";
 import { useAuth } from "@/auth/AuthContext";
-import Link from "next/link";
+import Router from "next/router";
 
 interface AddToCartButtonProps {
     product: {
@@ -12,6 +12,9 @@ interface AddToCartButtonProps {
         name: string;
         price: number;
         image: string | StaticImageData;
+        description: string;
+        stock: number;
+        categoryId: number;
     };
 }
 
@@ -27,15 +30,17 @@ const AddToCartButton: React.FC<AddToCartButtonProps> = ({ product }) => {
                 name: product.name,
                 price: product.price,
                 image: product.image,
-                quantity: 1,
+                description: product.description,
+                stock: product.stock,
+                categoryId: product.categoryId,
             };
 
-            addToCart(cartProduct); // Llama a la función addToCart
+            addToCart(cartProduct);
         } else {
-            // Si el usuario no está autenticado, muestra un alert y redirige al login
-            alert("Debe estar registrado para agregar productos");
-            // Después del alert, redirige al login
-            window.location.href = "/login"; // Redirige al login de manera programática
+            
+            alert("Debe estar Logueado para agregar productos");
+            
+            Router.push("/login");
         }
     };
 

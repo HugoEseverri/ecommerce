@@ -2,7 +2,7 @@
 
 
 import React, { useState } from "react";
-import { registerUser } from "@/app/services/products"; // Importa la función para hacer el registro
+import { registerUser } from "@/app/services/register"; // Importa la función para hacer el registro
 import { useRouter } from "next/navigation"; // Para redirigir después del registro
 import { validateRegister } from "@/app/utils/validations"; // Importa las validaciones del formulario
 

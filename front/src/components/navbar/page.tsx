@@ -3,9 +3,11 @@ import React from "react";
 import { useAuth } from "@/auth/AuthContext";
 import carrocompra from "@/assets/img/carrocompra.png";
 import Link from "next/link";
+import { useRouter } from "next/navigation"; // Usamos useRouter en lugar de Router
 
 const Navbar: React.FC = () => {
     const { isAuthenticated, logout } = useAuth();
+    const router = useRouter(); // Instanciamos el hook useRouter
 
     return (
         <div className="bg-white flex justify-center p-9 items-center">
@@ -40,7 +42,11 @@ const Navbar: React.FC = () => {
 
                                 <button
                                     className="text-black text-[18px] m-3 hover:text-[#0071E3] hover:scale-110 transform transition-transform duration-300 inline-block"
-                                    onClick={logout}
+                                    onClick={() => {
+                                        logout();
+                                        router.push("/");
+                                    }}
+
                                 >
                                     CERRAR SESIÓN
                                 </button>

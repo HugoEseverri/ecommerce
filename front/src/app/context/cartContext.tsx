@@ -48,21 +48,31 @@ export const useCart = () => {
 export const CartProvider = ({ children }: { children: ReactNode }) => {
     const [cart, setCart] = useState<CartProduct[]>([]);
 
+    // Guardar y cargar el carrito asociado al usuario logueado
     useEffect(() => {
-        if (typeof window !== "undefined") {
-            const savedCart = localStorage.getItem("cart");
+        const userId = localStorage.getItem("userId");
+        if (userId && typeof window !== "undefined") {
+            const savedCart = localStorage.getItem(`cart_${userId}`);
             setCart(savedCart ? JSON.parse(savedCart) : []);
         }
     }, []);
 
     useEffect(() => {
-        if (typeof window !== "undefined") {
-            console.log("Guardando carrito en localStorage", cart);
-            localStorage.setItem("cart", JSON.stringify(cart));
+        const userId = localStorage.getItem("userId");
+        if (userId && typeof window !== "undefined") {
+            console.log("Guardando carrito para el usuario:", userId);
+            localStorage.setItem(`cart_${userId}`, JSON.stringify(cart));
         }
     }, [cart]);
 
+
     const addToCart = (product: CartProduct) => {
+        const userId = localStorage.getItem("userId");
+        if (!userId) {
+            alert("Debe iniciar sesión para agregar productos al carrito.");
+            return;
+        }
+
         setCart((prevCart) => {
             const existingProduct = prevCart.find((item) => item.id === product.id);
 
@@ -93,19 +103,19 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
             if (!token) {
                 throw new Error("No se encontró un token de autenticación.");
             }
-    
+
             const userId = localStorage.getItem("userId");
             if (!userId) {
                 throw new Error("No se encontró un ID de usuario.");
             }
-    
+
             if (cart.length === 0) {
                 throw new Error("El carrito está vacío.");
             }
-    
+
 
             const productIds = cart.map((item) => item.id);
-    
+
             const order: Order = await createOrderService(productIds, parseInt(userId, 10), token);
             alert(`Compra realizada con éxito. Número de orden: ${order.id}`);
             clearCart();
@@ -114,7 +124,7 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
             alert("Hubo un problema al procesar la compra. Intenta nuevamente.");
         }
     };
-    
+
 
     const removeFromCart = (productId: number) => {
         setCart((prevCart) => prevCart.filter((item) => item.id !== productId));

@@ -1,6 +1,7 @@
 "use client";
+
 import React, { createContext, useState, useContext, ReactNode, useEffect } from "react";
-import { userLogin } from "@/app/services/products"; // Asegúrate de importar el servicio de login
+import { userLogin } from "@/app/services/login";
 
 // Definimos la interfaz para el tipo del contexto
 interface AuthContextType {
@@ -9,14 +10,14 @@ interface AuthContextType {
     authError: string | null;
     login: (username: string, password: string) => Promise<void>;
     logout: () => void;
-    setIsAuthenticated: React.Dispatch<React.SetStateAction<boolean>>;  // Agrega esto
-    setUserName: React.Dispatch<React.SetStateAction<string | null>>;  // Agrega esto
+    setIsAuthenticated: React.Dispatch<React.SetStateAction<boolean>>;
+    setUserName: React.Dispatch<React.SetStateAction<string | null>>;
 }
 
-// Inicializamos el contexto como `null`
+
 const AuthContext = createContext<AuthContextType | null>(null);
 
-// Hook personalizado para usar el contexto
+
 export const useAuth = (): AuthContextType => {
     const context = useContext(AuthContext);
     if (!context) {
@@ -30,6 +31,7 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
     const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false);
     const [userName, setUserName] = useState<string | null>(null);
     const [authError, setAuthError] = useState<string | null>(null);
+    
 
     useEffect(() => {
         const token = localStorage.getItem("authToken");
@@ -41,14 +43,14 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
             setIsAuthenticated(false);
         }
     }, []);
-    
+
     const login = async (username: string, password: string) => {
         try {
             const data = await userLogin(username, password);
 
             if (data && data.token) {
                 localStorage.setItem("authToken", data.token);
-                localStorage.setItem("userData", JSON.stringify(data.user)); 
+                localStorage.setItem("userData", JSON.stringify(data.user));
                 setIsAuthenticated(true);
                 setUserName(data.user.name);
                 setAuthError(null);
@@ -62,20 +64,23 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
     };
 
     const logout = () => {
+
         localStorage.removeItem("authToken");
         localStorage.removeItem("userData");
+        localStorage.removeItem("userId");
         setIsAuthenticated(false);
         setUserName(null);
         setAuthError(null);
+        
     };
 
     return (
-        <AuthContext.Provider value={{ 
-            isAuthenticated, 
-            userName, 
-            authError, 
-            login, 
-            logout, 
+        <AuthContext.Provider value={{
+            isAuthenticated,
+            userName,
+            authError,
+            login,
+            logout,
             setIsAuthenticated,
             setUserName
         }}>

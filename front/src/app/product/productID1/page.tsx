@@ -4,7 +4,7 @@ import ProductDetails from "@/components/products/productsID/productsID";
 
 const Page = async () => {
     const products = await getProducts();
-    const foundProduct = products.find((product) => product.id === 1); // Cambia el ID según sea necesario
+    const foundProduct = products.find((product) => product.id === 1);
 
     if (!foundProduct) {
         return (
