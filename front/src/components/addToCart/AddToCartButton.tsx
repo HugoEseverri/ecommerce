@@ -1,9 +1,9 @@
 "use client";
 
 import React from "react";
-import { useCart } from "@/app/context/cartContext";
+import { useCart } from "@/context/cartContext";
 import { StaticImageData } from "next/image";
-import { useAuth } from "@/auth/AuthContext";
+import { useAuth } from "@/context/AuthContext";
 import Router from "next/router";
 
 interface AddToCartButtonProps {
@@ -47,7 +47,7 @@ const AddToCartButton: React.FC<AddToCartButtonProps> = ({ product }) => {
     return (
         <button
             onClick={handleAddToCart}
-            className="text-lg text-white p-3 rounded-lg bg-blue-500 border-opacity-100 mt-5"
+            className="text-lg text-white p-3 rounded-lg bg-blue-500 border-opacity-100 mt-5 hover:bg-[#0035e3d3] transition-colors duration-300"
         >
             Agregar al Carrito
         </button>

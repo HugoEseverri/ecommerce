@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { useCart } from "@/app/context/cartContext";
+import { useCart } from "@/context/cartContext";
 import Image from "next/image";
 
 const CartPage = () => {

@@ -2,6 +2,7 @@ import React from "react";
 import facebook from "@/assets/img/facebook.png";
 import instagram from "@/assets/img/instagram.png";
 import Link from "next/link";
+import Image from "next/image";
 
 const Footer: React.FC = () => {
     return (
@@ -13,25 +14,44 @@ const Footer: React.FC = () => {
                     <p className="p-3">10% en tu primer compra</p>
                 </div>
                 <div className="flex flex-col ">
-                    <h3 className="p-3 text-[22px]">SOPORTE</h3>
-                    <p className="p-3">123 Calle Falsa, Buenos Aires, Argentina.</p>
-                    <p className="p-3">+059456123789</p>
+                    <Link href={`/contacto`}>
+                        <h3 className="p-3 text-[22px] hover:text-gray-300 hover:underline">CONTACTO</h3>
+                    </Link>
+                    <p className="p-3 ">123 Calle Falsa, Buenos Aires, Argentina.</p>
+                    <p className="p-3 hover:text-gray-100">+059456123789</p>
                 </div>
                 <div className="flex flex-col">
                     <Link href={`/dashboard`}>
-                    <h3 className="p-3 text-[22px]">CUENTA</h3>
+                        <h3 className="p-3 text-[22px] hover:text-gray-300 hover:underline">CUENTA</h3>
                     </Link>
                     <Link href={`/login`}>
-                    <p className="p-3">Iniciar sesión</p>
+                        <p className="p-3 hover:text-gray-300 hover:underline">Iniciar sesión</p>
                     </Link>
                     <Link href={`/register`}>
-                    <p className="p-3">Registrarse</p>
+                        <p className="p-3 hover:text-gray-300 hover:underline">Registrarse</p>
                     </Link>
                 </div>
-                
+
                 <div className="flex flex-col">
-                    <img className="w-16 m-2" src={facebook.src} alt="Facebook" />
-                    <img className="w-16 m-2" src={instagram.src} alt="Instagram" />
+                    <Link href={"https://www.facebook.com"}>
+                        <Image
+                            src={facebook}
+                            alt={"Facebook"}
+                            width={900}
+                            height={650}
+                            className="w-16 m-2 transform transition duration-300 hover:scale-110"
+                        />
+                    </Link>
+                    <Link href={"https://www.instagram.com"}>
+                        <Image
+                            src={instagram}
+                            alt={"Instagram"}
+                            width={900}
+                            height={650}
+                            className="w-16 m-2 transform transition duration-300 hover:scale-110"
+                        />
+                    </Link>
+
                 </div>
             </div>
             <p className="text-center">© 2024 Mi Aplicación. Todos los derechos reservados.</p>

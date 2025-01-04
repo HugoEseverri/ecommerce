@@ -44,7 +44,7 @@ const Register = () => {
         event.preventDefault();
         setLoading(true);
         setRegisterError(""); // Limpiar mensaje de error previo
-
+    
         // Validar el formulario antes de enviarlo
         const formErrors = validateRegister(userData);
         if (Object.keys(formErrors).length > 0) {
@@ -52,7 +52,7 @@ const Register = () => {
             setLoading(false);
             return;
         }
-
+    
         try {
             // Llamada a la API para registrar el usuario
             const data = await registerUser(
@@ -62,18 +62,23 @@ const Register = () => {
                 userData.address,
                 userData.phone
             );
-            alert("Usuario registrado con éxito:")
             
+            // No guardes el token, solo muestra un mensaje de éxito
+            alert("¡Cuenta registrada con éxito! Ahora, por favor, inicia sesión.");
+            
+            // Redirige a la página de login
             router.push("/login");
+    
         } catch (error) {
             setRegisterError(
                 error instanceof Error ? error.message : "Error desconocido"
             );
-            alert("Error al registrar usuario nuevo")
+            alert("Error al registrar usuario nuevo");
         } finally {
             setLoading(false);
         }
     };
+    
 
     return (
         <div className="flex  items-center justify-center bg-gray-100">

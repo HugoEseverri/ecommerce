@@ -14,8 +14,8 @@ export default async function HomePage() {
                 <Carousel />
                 <Etiquetas />
                 <Link href={`/product`} >
-                    <div className="flex flex-col justify-center items-start ml-[230px] hover:text-blue-700 group">
-                        <h2 className="text-black text-3xl group-hover:text-blue-700">Productos</h2>
+                    <div className="flex flex-col justify-center items-start ml-[230px] hover:text-blue-700 group ">
+                        <h1 className="text-black text-3xl group-hover:text-blue-700 transform transition hover:scale-110">Productos</h1>
                         <hr className="w-[1440px] h-1 bg-black group-hover:bg-blue-600" />
                     </div>
                 </Link>

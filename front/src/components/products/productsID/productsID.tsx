@@ -10,6 +10,8 @@ interface ProductDetailsProps {
         description: string;
         price: number;
         image: string | StaticImageData;
+        stock: number;
+        categoryId: number;
     };
 }
 

@@ -2,7 +2,7 @@
 
 import React, { createContext, useContext, useState, ReactNode, useEffect } from "react";
 import { StaticImageData } from "next/image";
-import { createOrderService } from "../services/orders";
+import { createOrderService } from "../app/services/orders";
 
 
 export interface CartProduct {

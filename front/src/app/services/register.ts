@@ -1,6 +1,5 @@
 const apiURL = process.env.NEXT_PUBLIC_API_URL;
 
-
 export const registerUser = async (
     email: string,
     password: string,
@@ -29,8 +28,9 @@ export const registerUser = async (
 
         const data = await response.json();
 
-        localStorage.setItem("authToken", data.token); // Si el backend no devuelve un token aquí, puedes omitirlo.
-        localStorage.setItem("userData", JSON.stringify(data));
+        // Eliminar estas líneas para evitar guardar el token automáticamente
+        // localStorage.setItem("authToken", data.token);
+        // localStorage.setItem("userData", JSON.stringify(data));
 
         return data;
     } catch (error) {

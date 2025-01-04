@@ -4,10 +4,10 @@ import React, { useState, useEffect } from "react";
 import { validateField, validateLogin } from "@/app/utils/validations";
 import { userLogin } from "@/app/services/login";
 import { useRouter } from "next/navigation";
-import { useAuth } from "@/auth/AuthContext";
+import { useAuth } from "@/context/AuthContext";
 
 function Login() {
-    const { setIsAuthenticated, setUserName } = useAuth(); // Desestructura setIsAuthenticated y setUserName desde el contexto
+    const { setIsAuthenticated, setUserName } = useAuth();
 
     const [userData, setUserData] = useState({
         username: "",
@@ -21,11 +21,11 @@ function Login() {
 
     const router = useRouter();
 
-    // Verificación del token al cargar el componente
+    
     useEffect(() => {
         const token = localStorage.getItem("authToken");
         if (token) {
-            // Si el token ya existe, redirigimos al dashboard
+            
             router.push("/dashboard");
         }
     }, [router]);
@@ -61,17 +61,17 @@ function Login() {
             console.log("Usuario autenticado con éxito:", data);
 
             if (data && data.token) {
-                // Guardamos el token y los datos del usuario
+                
                 localStorage.setItem("authToken", data.token);
                 localStorage.setItem("userData", JSON.stringify(data.user));
 
-                // Actualizar el estado en el AuthContext
-                setIsAuthenticated(true); // Actualiza el estado de autenticación
-                setUserName(data.user.name); // Actualiza el nombre del usuario
+                
+                setIsAuthenticated(true);
+                setUserName(data.user.name);
 
                 alert("Sesión iniciada con éxito");
 
-                // Redirige al dashboard o home
+                
                 router.push("/dashboard");
             } else {
                 setLoginError("No se recibió un token válido.");

@@ -4,16 +4,23 @@ import { IProducts } from "@/interfaces/products.interface";
 const apiURL = process.env.NEXT_PUBLIC_API_URL;
 
 
-export async function getProducts() {
+export async function getProducts(): Promise<IProducts[]> {
     try {
         const res = await fetch(`${apiURL}/products`, {
             method: "GET",
-            cache: "no-cache"
+            cache: "no-cache",
         });
+
+        if (!res.ok) {
+            const errorMessage = await res.text();
+            throw new Error(`Error en la solicitud: ${res.status} - ${errorMessage}`);
+        }
+
         const products: IProducts[] = await res.json();
         return products;
     } catch (error) {
-        throw new Error(error as string);
+        console.error("Error en getProducts:", error);
+        throw new Error(error instanceof Error ? error.message : "Error desconocido");
     }
 }
 

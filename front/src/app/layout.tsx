@@ -3,8 +3,8 @@ import Navbar from "../components/navbar/page";
 import Footer from "../components/footer/page";
 import localFont from "next/font/local";
 import "./globals.css";
-import { AuthProvider } from "@/auth/AuthContext";
-import { CartProvider } from "@/app/context/cartContext";
+import { AuthProvider } from "@/context/AuthContext";
+import { CartProvider } from "@/context/cartContext";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",

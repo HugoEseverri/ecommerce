@@ -4,8 +4,8 @@ import React from "react";
 import { IProducts } from "../../interfaces/products.interface";
 import Image from "next/image";
 import Link from "next/link";
-import { useAuth } from "@/auth/AuthContext";
-import { useCart } from "@/app/context/cartContext";
+import { useAuth } from "@/context/AuthContext";
+import { useCart } from "@/context/cartContext";
 
 interface CardProps {
     product: IProducts;
@@ -66,7 +66,7 @@ const Card: React.FC<CardProps> = ({ product }) => {
                     </button>
                 ) : (
                     <Link href="/login">
-                        <button className="text-lg text-white p-[10px]  rounded-lg bg-blue-500 border-opacity-100">
+                        <button className="text-lg text-white p-[10px]  rounded-lg bg-blue-500 border-opacity-100 hover:bg-[#0035e3d3] transition-colors duration-300">
                             Agregar al Carrito
                         </button>
                     </Link>

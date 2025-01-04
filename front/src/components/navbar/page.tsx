@@ -1,6 +1,6 @@
 "use client";
 import React from "react";
-import { useAuth } from "@/auth/AuthContext";
+import { useAuth } from "@/context/AuthContext";
 import carrocompra from "@/assets/img/carrocompra.png";
 import Link from "next/link";
 import { useRouter } from "next/navigation"; // Usamos useRouter en lugar de Router
