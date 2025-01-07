@@ -1,6 +1,6 @@
 import React from "react";
 import { StaticImageData } from "next/image";
-import Image from "next/image"; // Asegúrate de importar el componente Image de Next.js
+import Image from "next/image";
 import AddToCartButton from "@/components/addToCart/AddToCartButton";
 
 interface ProductDetailsProps {

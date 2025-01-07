@@ -3,11 +3,11 @@ import React from "react";
 import { useAuth } from "@/context/AuthContext";
 import carrocompra from "@/assets/img/carrocompra.png";
 import Link from "next/link";
-import { useRouter } from "next/navigation"; // Usamos useRouter en lugar de Router
+import { useRouter } from "next/navigation";
 
 const Navbar: React.FC = () => {
     const { isAuthenticated, logout } = useAuth();
-    const router = useRouter(); // Instanciamos el hook useRouter
+    const router = useRouter();
 
     return (
         <div className="bg-white flex justify-center p-9 items-center">

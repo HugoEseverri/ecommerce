@@ -1,8 +1,6 @@
 import { IProducts } from "@/interfaces/products.interface";
 
-
 const apiURL = process.env.NEXT_PUBLIC_API_URL;
-
 
 export async function getProducts(): Promise<IProducts[]> {
     try {
@@ -24,7 +22,6 @@ export async function getProducts(): Promise<IProducts[]> {
     }
 }
 
-
 export async function getProductById(productID: string): Promise<IProducts | null> {
     try {
         const response = await fetch(`${apiURL}/product/${productID}`);
@@ -37,15 +34,3 @@ export async function getProductById(productID: string): Promise<IProducts | nul
         return null;
     }
 }
-
-
-
-
-
-
-
-
-
-// src/app/services.ts
-// src/app/services.ts
-

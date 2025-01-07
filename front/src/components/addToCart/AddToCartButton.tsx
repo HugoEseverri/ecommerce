@@ -20,11 +20,11 @@ interface AddToCartButtonProps {
 
 const AddToCartButton: React.FC<AddToCartButtonProps> = ({ product }) => {
     const { addToCart } = useCart();
-    const { isAuthenticated } = useAuth(); // Obtener el estado de autenticación
+    const { isAuthenticated } = useAuth();
 
     const handleAddToCart = () => {
         if (isAuthenticated) {
-            // Si el usuario está autenticado, agregar al carrito
+            
             const cartProduct = {
                 id: product.id,
                 name: product.name,

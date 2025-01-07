@@ -9,8 +9,6 @@ export const fetchOrders = async (token: string) => {
     }
 
     try {
-        // Verificamos si el token es válido, si hay algún método para validarlo en el frontend
-        // Ejemplo: Si tienes la fecha de expiración del token, puedes validarlo aquí
 
         const response = await fetch(`${apiURL}/users/orders`, {
             method: "GET",
@@ -37,13 +35,12 @@ export const fetchOrders = async (token: string) => {
             }
         }
 
-        // Si la respuesta es válida, procesamos los datos
         const data = await response.json(); 
         return data;
 
     } catch (error) {
-        console.error("Error al obtener las órdenes:", error);  // Captura cualquier error
-        throw error;  // Reenvía el error para manejarlo en el componente
+        console.error("Error al obtener las órdenes:", error);
+        throw error;
     }
 };
 

@@ -1,13 +1,12 @@
 "use client"
 
-
 import React, { useState } from "react";
-import { registerUser } from "@/app/services/register"; // Importa la función para hacer el registro
-import { useRouter } from "next/navigation"; // Para redirigir después del registro
-import { validateRegister } from "@/app/utils/validations"; // Importa las validaciones del formulario
+import { registerUser } from "@/app/services/register";
+import { useRouter } from "next/navigation";
+import { validateRegister } from "@/app/utils/validations";
 
 const Register = () => {
-    // Definir los estados necesarios
+    
     const [userData, setUserData] = useState({
         email: "",
         password: "",
@@ -19,10 +18,9 @@ const Register = () => {
     const [errors, setErrors] = useState<{ [key: string]: string }>({});
     const [loading, setLoading] = useState(false);
     const [registerError, setRegisterError] = useState("");
-    const [showPassword, setShowPassword] = useState(false); // Estado para controlar la visibilidad de la contraseña
-    const router = useRouter(); // Redirección después del registro
+    const [showPassword, setShowPassword] = useState(false);
+    const router = useRouter();
 
-    // Maneja los cambios en los campos del formulario
     const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         const { name, value } = event.target;
 
@@ -31,7 +29,6 @@ const Register = () => {
             [name]: value,
         }));
 
-        // Validación individual para cada campo
         const fieldError = validateRegister({ ...userData, [name]: value })[name];
         setErrors((prevErrors) => ({
             ...prevErrors,
@@ -39,13 +36,12 @@ const Register = () => {
         }));
     };
 
-    // Función para manejar el envío del formulario
     const handleOnSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
         setLoading(true);
-        setRegisterError(""); // Limpiar mensaje de error previo
+        setRegisterError("");
     
-        // Validar el formulario antes de enviarlo
+        
         const formErrors = validateRegister(userData);
         if (Object.keys(formErrors).length > 0) {
             setErrors(formErrors);
@@ -54,7 +50,7 @@ const Register = () => {
         }
     
         try {
-            // Llamada a la API para registrar el usuario
+            
             const data = await registerUser(
                 userData.email,
                 userData.password,
@@ -63,10 +59,10 @@ const Register = () => {
                 userData.phone
             );
             
-            // No guardes el token, solo muestra un mensaje de éxito
+            
             alert("¡Cuenta registrada con éxito! Ahora, por favor, inicia sesión.");
             
-            // Redirige a la página de login
+            
             router.push("/login");
     
         } catch (error) {

@@ -48,7 +48,6 @@ export const useCart = () => {
 export const CartProvider = ({ children }: { children: ReactNode }) => {
     const [cart, setCart] = useState<CartProduct[]>([]);
 
-    // Guardar y cargar el carrito asociado al usuario logueado
     useEffect(() => {
         const userId = localStorage.getItem("userId");
         if (userId && typeof window !== "undefined") {

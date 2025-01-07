@@ -28,10 +28,6 @@ export const registerUser = async (
 
         const data = await response.json();
 
-        // Eliminar estas líneas para evitar guardar el token automáticamente
-        // localStorage.setItem("authToken", data.token);
-        // localStorage.setItem("userData", JSON.stringify(data));
-
         return data;
     } catch (error) {
         throw new Error(error instanceof Error ? error.message : "Error desconocido");
