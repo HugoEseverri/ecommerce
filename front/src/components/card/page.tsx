@@ -6,6 +6,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useAuth } from "@/context/AuthContext";
 import { useCart } from "@/context/cartContext";
+import Router from "next/navigation";
 
 interface CardProps {
     product: IProducts;

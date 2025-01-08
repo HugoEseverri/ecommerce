@@ -45,6 +45,7 @@ const Navbar: React.FC = () => {
                                     onClick={() => {
                                         logout();
                                         router.push("/");
+                                        
                                     }}
 
                                 >

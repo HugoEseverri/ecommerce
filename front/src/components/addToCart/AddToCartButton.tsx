@@ -4,7 +4,7 @@ import React from "react";
 import { useCart } from "@/context/cartContext";
 import { StaticImageData } from "next/image";
 import { useAuth } from "@/context/AuthContext";
-import Router from "next/router";
+import {useRouter} from "next/navigation";
 
 interface AddToCartButtonProps {
     product: {
@@ -21,6 +21,7 @@ interface AddToCartButtonProps {
 const AddToCartButton: React.FC<AddToCartButtonProps> = ({ product }) => {
     const { addToCart } = useCart();
     const { isAuthenticated } = useAuth();
+    const router = useRouter();
 
     const handleAddToCart = () => {
         if (isAuthenticated) {
@@ -40,7 +41,7 @@ const AddToCartButton: React.FC<AddToCartButtonProps> = ({ product }) => {
             
             alert("Debe estar Logueado para agregar productos");
             
-            Router.push("/login");
+            router.push("/login");
         }
     };
 
