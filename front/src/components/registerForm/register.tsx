@@ -4,9 +4,10 @@ import React, { useState } from "react";
 import { registerUser } from "@/app/services/register";
 import { useRouter } from "next/navigation";
 import { validateRegister } from "@/app/utils/validations";
+import Swal from "sweetalert2";
 
 const Register = () => {
-    
+
     const [userData, setUserData] = useState({
         email: "",
         password: "",
@@ -40,17 +41,17 @@ const Register = () => {
         event.preventDefault();
         setLoading(true);
         setRegisterError("");
-    
-        
+
+
         const formErrors = validateRegister(userData);
         if (Object.keys(formErrors).length > 0) {
             setErrors(formErrors);
             setLoading(false);
             return;
         }
-    
+
         try {
-            
+
             const data = await registerUser(
                 userData.email,
                 userData.password,
@@ -58,30 +59,38 @@ const Register = () => {
                 userData.address,
                 userData.phone
             );
-            
-            
-            alert("¡Cuenta registrada con éxito! Ahora, por favor, inicia sesión.");
-            
-            
+
+            Swal.fire({
+                title: "Felicitaciones!",
+                text: "Cuenta registrada con éxito. Ahora, por favor, inicia sesión",
+                icon: "success"
+            });
+
+
+
             router.push("/login");
-    
+
         } catch (error) {
             setRegisterError(
                 error instanceof Error ? error.message : "Error desconocido"
             );
-            alert("Error al registrar usuario nuevo");
+            Swal.fire({
+                title: "Ocurrió un problema",
+                text: "Error al registrar un nuevo usuario",
+                icon: "error"
+            });
         } finally {
             setLoading(false);
         }
     };
-    
+
 
     return (
         <div className="flex  items-center justify-center bg-gray-100">
             <div className="max-w-md bg-white rounded-lg shadow-md p-8 w-[500px]">
                 <h1 className="text-2xl font-semibold text-gray-800 mb-6">Crear Cuenta</h1>
                 <form onSubmit={handleOnSubmit} className="space-y-4">
-                    {/* Campo de email */}
+                    
                     <div className="mb-4">
                         <label htmlFor="email" className="block text-sm font-medium text-gray-700">
                             Email
@@ -97,7 +106,6 @@ const Register = () => {
                         {errors.email && <p className="text-red-500 text-sm">{errors.email}</p>}
                     </div>
 
-                    {/* Campo de nombre */}
                     <div className="mb-4">
                         <label htmlFor="name" className="block text-sm font-medium text-gray-700">
                             Nombre
@@ -113,7 +121,6 @@ const Register = () => {
                         {errors.name && <p className="text-red-500 text-sm">{errors.name}</p>}
                     </div>
 
-                    {/* Campo de dirección */}
                     <div className="mb-4">
                         <label htmlFor="address" className="block text-sm font-medium text-gray-700">
                             Dirección
@@ -129,7 +136,6 @@ const Register = () => {
                         {errors.address && <p className="text-red-500 text-sm">{errors.address}</p>}
                     </div>
 
-                    {/* Campo de teléfono */}
                     <div className="mb-4">
                         <label htmlFor="phone" className="block text-sm font-medium text-gray-700">
                             Teléfono
@@ -145,12 +151,11 @@ const Register = () => {
                         {errors.phone && <p className="text-red-500 text-sm">{errors.phone}</p>}
                     </div>
 
-                    {/* Campo de contraseña */}
                     <div>
                         <label className="block text-black mb-1">Contraseña</label>
                         <div className="relative">
                             <input
-                                type={showPassword ? "text" : "password"} // Cambiar el tipo de campo dependiendo del estado
+                                type={showPassword ? "text" : "password"}
                                 name="password"
                                 value={userData.password}
                                 onChange={handleInputChange}
@@ -159,7 +164,7 @@ const Register = () => {
                             />
                             <button
                                 type="button"
-                                onClick={() => setShowPassword((prev) => !prev)} // Cambiar el estado para mostrar/ocultar la contraseña
+                                onClick={() => setShowPassword((prev) => !prev)}
                                 className="absolute inset-y-0 right-3 flex items-center text-gray-500 hover:text-gray-700"
                             >
                                 {showPassword ? "Ocultar" : "Mostrar"}
@@ -170,12 +175,10 @@ const Register = () => {
                         )}
                     </div>
 
-                    {/* Mensaje de error de registro */}
                     {registerError && (
                         <p className="text-sm text-red-500">{registerError}</p>
                     )}
 
-                    {/* Botón de envío */}
                     <button
                         type="submit"
                         disabled={loading}

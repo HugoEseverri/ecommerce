@@ -8,15 +8,17 @@ const CartPage = () => {
     const { cart, removeFromCart, handleFinishBuy, clearCart, getTotalPrice } = useCart();
 
     return (
-        <main className="p-6 bg-gray-100 flex justify-center min-h-screen">
-            <div className="bg-white p-4 border rounded-lg min-h-[200px] w-[800px]">
+        <main className="p-6 bg-gray-100 flex justify-center">
+            <div className="bg-white p-4 border rounded-lg min-h-[500px] w-[450px] md:w-[700px]">
 
 
                 <h1 className="text-2xl font-bold text-black">Carrito de Compras</h1>
                 {cart.length === 0 ? (
                     <div className="mt-4">
                         <p className="text-xl text-black">Productos agregados al carrito:</p>
+                        <hr className="bg-black h-0.5" />
                         <p className="mt-4 text-black">El carrito está vacío.</p>
+
                     </div>
                 ) : (
                     <>
@@ -40,6 +42,7 @@ const CartPage = () => {
                                         />
                                         <div>
                                             <h3 className="text-lg font-semibold text-black">{product.name}</h3>
+                                            <p className="text-lg font-semibold text-black">Cantidad: {product.quantity}</p>
                                             <p className="text-lg font-semibold text-black">Precio: ${product.price}</p>
                                         </div>
                                     </div>

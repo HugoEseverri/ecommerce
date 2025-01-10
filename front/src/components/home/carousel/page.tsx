@@ -38,7 +38,7 @@ const Carousel: React.FC = () => {
             >
                 {images.map((src, index) => (
                     
-                    <div key={index} className="flex-shrink-0 w-full h-full relative">
+                    <div key={index} className="flex-shrink-0 w-full h-full relative ">
                         
                         <Link href={productLinks[index]}>
                             <div className="absolute inset-0 z-10" />
@@ -47,8 +47,9 @@ const Carousel: React.FC = () => {
                         <Image
                             src={src}
                             alt={`Slide ${index + 1}`}
-                            width={1920}
-                            height={500}
+                            width={0}
+                            height={0}
+                            className=''
                         />
                     </div>
                 ))}

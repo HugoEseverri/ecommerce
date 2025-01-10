@@ -4,7 +4,8 @@ import React from "react";
 import { useCart } from "@/context/cartContext";
 import { StaticImageData } from "next/image";
 import { useAuth } from "@/context/AuthContext";
-import {useRouter} from "next/navigation";
+import { useRouter } from "next/navigation";
+import Swal from "sweetalert2";
 
 interface AddToCartButtonProps {
     product: {
@@ -25,7 +26,7 @@ const AddToCartButton: React.FC<AddToCartButtonProps> = ({ product }) => {
 
     const handleAddToCart = () => {
         if (isAuthenticated) {
-            
+
             const cartProduct = {
                 id: product.id,
                 name: product.name,
@@ -38,9 +39,13 @@ const AddToCartButton: React.FC<AddToCartButtonProps> = ({ product }) => {
 
             addToCart(cartProduct);
         } else {
-            
-            alert("Debe estar Logueado para agregar productos");
-            
+
+            Swal.fire({
+                title: "Ocurrió un problema",
+                text: "Debe iniciar sesión para agregar un producto",
+                icon: "error"
+            });
+
             router.push("/login");
         }
     };

@@ -9,7 +9,7 @@ import homepod from "@/assets/img/homepod.png"
 const Etiquetas: React.FC = () => {
     return (
         <div>
-            <ul className="grid grid-cols-3 grid-rows-2 gap-5 p-5">
+            <ul className="grid grid-cols-2 md:grid-cols-3 grid-rows-2 gap-5 p-5">
                 <li className="etiqueta-base flex items-center justify-center text-center  bg-gray-100 text-gray m-[20px] h-[80px]">
                     <img src={celulares.src} alt="Gaming" className="w-6 h-6 mr-2" /> iPhone
                 </li>

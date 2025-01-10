@@ -1,6 +1,8 @@
 import React from "react";
 import Card from "@/components/card/page";
 import { getProducts } from "@/app/services/products";
+import productsBanner from "@/assets/img/productos.jpg"
+import Image from "next/image";
 
 
 export default async function pageProduct() {
@@ -9,11 +11,19 @@ export default async function pageProduct() {
 
         return (
             <main className=" bg-gray-100">
-                
-                <div className="flex flex-col justify-center w-[1440px] ml-[230px]">
-                    <p className="text-black text-xl my-10 text-center">Encontrá lo último en tecnología en Mundo Tech, vendedor oficial de productos Apple. Disfrutá de nuestros Productos Destacados</p>
-                    <h1 className="text-black text-2xl mb-10">PRODUCTOS</h1>
-                    <hr className=" h-1 bg-gradient-to-r from-blue-800 to-transparent rounded" />
+                <div>
+                    <Image
+                        src={productsBanner}
+                        alt="Productos Apple"
+                        width={0}
+                        height={0}
+                        sizes="100vw"
+                        className="object-cover h-[250px] sm:h-[300px]  md:h-full"
+                    />
+
+                </div>
+                <div className="flex flex-col justify-center mt-[40px]">
+                    <h1 className="text-black text-5xl text-center">Productos</h1>
                 </div>
                 <div className="flex justify-center flex-wrap gap-4">
                     {products && products.length > 0 ? (

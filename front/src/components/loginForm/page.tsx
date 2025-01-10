@@ -5,6 +5,7 @@ import { validateField, validateLogin } from "@/app/utils/validations";
 import { userLogin } from "@/app/services/login";
 import { useRouter } from "next/navigation";
 import { useAuth } from "@/context/AuthContext";
+import Swal from "sweetalert2";
 
 function Login() {
     const { setIsAuthenticated, setUserName } = useAuth();
@@ -21,11 +22,11 @@ function Login() {
 
     const router = useRouter();
 
-    
+
     useEffect(() => {
         const token = localStorage.getItem("authToken");
         if (token) {
-            
+
             router.push("/dashboard");
         }
     }, [router]);
@@ -61,24 +62,32 @@ function Login() {
             console.log("Usuario autenticado con éxito:", data);
 
             if (data && data.token) {
-                
+
                 localStorage.setItem("authToken", data.token);
                 localStorage.setItem("userData", JSON.stringify(data.user));
 
-                
+
                 setIsAuthenticated(true);
                 setUserName(data.user.name);
 
-                alert("Sesión iniciada con éxito");
+                Swal.fire({
+                    title: "Buen trabajo!",
+                    text: "Has iniciado sesión!",
+                    icon: "success"
+                });
 
-                
+
                 router.push("/dashboard");
             } else {
                 setLoginError("No se recibió un token válido.");
             }
         } catch (error) {
             setLoginError(error instanceof Error ? error.message : "Error desconocido");
-            alert("Usuario no registrado");
+            Swal.fire({
+                title: "Ocurrió un problema",
+                text: "Este usuario no existe",
+                icon: "error"
+            });
         } finally {
             setLoading(false);
         }

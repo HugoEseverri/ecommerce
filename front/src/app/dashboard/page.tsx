@@ -4,9 +4,11 @@ import React, { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { fetchOrders } from "@/app/services/orders";
 import { useAuth } from "@/context/AuthContext";
+import { useCart } from "@/context/cartContext";
 
 const Dashboard = () => {
-    const { logout } = useAuth(); 
+    const { logout } = useAuth();
+    const { clearCart } = useCart();
     const [userData, setUserData] = useState<any>(null);
     const [orders, setOrders] = useState<any[]>([]);
     const [loadingOrders, setLoadingOrders] = useState<boolean>(false);
@@ -51,7 +53,7 @@ const Dashboard = () => {
 
     return (
         <div className="flex flex-col items-center justify-center bg-gray-100 p-9">
-            <div className="bg-white rounded-lg shadow-md p-8 w-[700px] m-9">
+            <div className="bg-white rounded-lg shadow-md p-8 w-[400px] md:w-[700px] m-9">
                 <h1 className="text-2xl font-semibold text-black mb-6">
                     Bienvenid@, {userData.name}!
                 </h1>
@@ -66,6 +68,7 @@ const Dashboard = () => {
                     className="w-full bg-blue-500 text-white py-2 rounded-lg hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 mt-4"
                     onClick={() => {
                         logout();
+                        clearCart();
                         router.push("/login");
                     }}
                 >
@@ -73,7 +76,7 @@ const Dashboard = () => {
                 </button>
             </div>
 
-            <div className="bg-white rounded-lg shadow-md p-8 w-[700px]">
+            <div className="bg-white rounded-lg shadow-md p-8 w-[400px] md:w-[700px]">
                 {loadingOrders ? (
                     <p className="mt-6 text-black text-center">Cargando tus órdenes...</p>
                 ) : error ? (
